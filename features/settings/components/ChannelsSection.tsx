@@ -761,13 +761,16 @@ export function ChannelsSection() {
   // Handlers
   const handleToggleChannel = async (channel: MessagingChannel) => {
     const isConnected = channel.status === 'connected';
+    const isConnecting = channel.status === 'connecting';
+    const shouldConnect = !(isConnected || isConnecting);
+    
     try {
       await toggleMutation.mutateAsync({
         channelId: channel.id,
-        connect: !isConnected,
+        connect: shouldConnect,
       });
       addToast(
-        isConnected ? 'Canal desconectado.' : 'Conectando canal...',
+        shouldConnect ? 'Conectando canal...' : (isConnecting ? 'Conexão cancelada.' : 'Canal desconectado.'),
         'success'
       );
     } catch {
