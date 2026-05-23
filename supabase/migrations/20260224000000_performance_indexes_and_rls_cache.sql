@@ -36,14 +36,9 @@ CREATE INDEX IF NOT EXISTS idx_deals_organization_id
 CREATE INDEX IF NOT EXISTS idx_leads_organization_id
   ON public.leads(organization_id);
 
--- ai_decisions.organization_id
-CREATE INDEX IF NOT EXISTS idx_ai_decisions_organization_id
-  ON public.ai_decisions(organization_id);
 
--- messaging_webhook_events.organization_id
--- Used in webhook dedup checks and audit queries.
-CREATE INDEX IF NOT EXISTS idx_messaging_webhook_events_organization_id
-  ON public.messaging_webhook_events(organization_id);
+
+
 
 
 -- ============================================================

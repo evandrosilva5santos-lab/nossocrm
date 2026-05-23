@@ -5,38 +5,25 @@ import { useToast } from '@/context/ToastContext';
 import { useAuth } from '@/context/AuthContext';
 import type { AIModelInfo } from '@/app/api/ai/models/route';
 
-// Função para validar API key Gemini fazendo uma chamada real à API
 async function validateApiKey(apiKey: string, model: string): Promise<{ valid: boolean; error?: string }> {
     if (!apiKey || apiKey.trim().length < 10) {
         return { valid: false, error: 'Chave muito curta' };
     }
 
     try {
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: 'Hi' }] }],
-                    generationConfig: { maxOutputTokens: 1 }
-                })
-            }
-        );
+        const response = await fetch('/api/ai/validate-key', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ apiKey, model })
+        });
 
-        if (response.ok) return { valid: true };
+        if (response.ok) {
+            const result = await response.json();
+            return { valid: result.valid, error: result.error };
+        }
 
         const error = await response.json();
-        if (response.status === 400 && error?.error?.message?.includes('API key not valid')) {
-            return { valid: false, error: 'Chave de API inválida' };
-        }
-        if (response.status === 403) {
-            return { valid: false, error: 'Chave sem permissão para este modelo' };
-        }
-        if (response.status === 429) {
-            return { valid: true }; // rate limit = key válida
-        }
-        return { valid: false, error: error?.error?.message || 'Erro desconhecido' };
+        return { valid: false, error: error?.error || 'Erro desconhecido' };
     } catch {
         return { valid: false, error: 'Erro de conexão. Verifique sua internet.' };
     }
