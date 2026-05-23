@@ -24,7 +24,8 @@ async function validateApiKey(apiKey: string, model: string): Promise<{ valid: b
 
         const error = await response.json();
         return { valid: false, error: error?.error || 'Erro desconhecido' };
-    } catch {
+    } catch (err) {
+        console.error('[validateApiKey] Client error:', err);
         return { valid: false, error: 'Erro de conexão. Verifique sua internet.' };
     }
 }

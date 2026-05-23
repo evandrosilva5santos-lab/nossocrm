@@ -9,17 +9,24 @@ function json(body: any, status = 200): Response {
 }
 
 export async function POST(request: NextRequest) {
+  console.log('[api/ai/validate-key] Received validation request');
+
   if (!isAllowedOrigin(request)) {
+    console.warn('[api/ai/validate-key] Blocked by origin validation');
     return json({ valid: false, error: 'Forbidden' }, 403);
   }
 
   try {
     const { apiKey, model } = await request.json();
+    console.log(`[api/ai/validate-key] Validating key ending in ...${apiKey?.slice(-4)}, model: ${model}`);
+    
     if (!apiKey || apiKey.trim().length < 10) {
       return json({ valid: false, error: 'Chave muito curta' }, 400);
     }
 
-    const modelToUse = model || 'gemini-1.5-flash';
+    // Force validation to use a known working model regardless of what the user has selected
+    // since older models like gemini-1.5-flash might be deprecated.
+    const modelToUse = 'gemini-2.5-flash';
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${apiKey}`,

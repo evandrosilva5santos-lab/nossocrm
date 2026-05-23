@@ -191,13 +191,19 @@ export function useCreateBusinessUnit() {
       const supabase = getClient();
 
       // Get current user's org
-      const { data: profile } = await supabase
+      const { data: authData, error: authError } = await supabase.auth.getUser();
+      if (authError || !authData.user) {
+        throw new Error('Usuário não autenticado.');
+      }
+
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('organization_id')
+        .eq('id', authData.user.id)
         .single();
 
-      if (!profile?.organization_id) {
-        throw new Error('Organization not found');
+      if (profileError || !profile?.organization_id) {
+        throw new Error('Organização não encontrada.');
       }
 
       const dbData = toDb(input, profile.organization_id);
@@ -208,7 +214,13 @@ export function useCreateBusinessUnit() {
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('[useCreateBusinessUnit] Supabase error:', error);
+        if (error.code === '23505') {
+          throw new Error(`Já existe uma unidade com o slug "${input.key}", mesmo que deletada. Por favor, escolha outro identificador.`);
+        }
+        throw new Error(error.message || 'Erro ao criar unidade de negócio no banco de dados.');
+      }
 
       // Add initial members if provided
       if (input.memberIds?.length) {

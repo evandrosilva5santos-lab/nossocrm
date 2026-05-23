@@ -14,13 +14,16 @@ import { AI_DEFAULT_MODELS, AI_DEFAULT_PROVIDER } from './defaults';
 export type AIProvider = 'google';
 
 const ALLOWED_GOOGLE_MODELS = new Set([
+  'gemini-2.5-flash',
+  'gemini-2.5-pro',
   'gemini-2.0-flash',
+  'gemini-2.0-flash-001',
+  'gemini-2.0-flash-lite-001',
   'gemini-2.0-flash-lite',
+  'gemini-flash-latest',
+  'gemini-flash-lite-latest',
+  'gemini-pro-latest',
   'gemini-1.5-pro',
-  'gemini-1.5-flash',
-  'gemini-1.5-flash-8b',
-  'gemini-2.5-pro-preview-03-25',
-  'gemini-2.5-flash-preview-04-17',
 ]);
 
 /**

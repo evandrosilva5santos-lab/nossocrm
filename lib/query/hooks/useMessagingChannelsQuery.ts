@@ -185,13 +185,19 @@ export function useCreateMessagingChannel() {
       const supabase = getClient();
 
       // Get current user's org
-      const { data: profile } = await supabase
+      const { data: authData, error: authError } = await supabase.auth.getUser();
+      if (authError || !authData.user) {
+        throw new Error('Usuário não autenticado.');
+      }
+
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('organization_id')
+        .eq('id', authData.user.id)
         .single();
 
-      if (!profile?.organization_id) {
-        throw new Error('Organization not found');
+      if (profileError || !profile?.organization_id) {
+        throw new Error('Organização não encontrada.');
       }
 
       const dbData = transformChannelToDb(input, profile.organization_id);

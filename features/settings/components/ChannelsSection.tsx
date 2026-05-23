@@ -109,6 +109,7 @@ function getSupabaseProjectRef(): string {
 
 const WEBHOOK_FUNCTION_MAP: Record<string, string> = {
   'z-api': 'messaging-webhook-zapi',
+  'evolution': 'messaging-webhook-evolution',
   'meta-cloud': 'messaging-webhook-meta',
   'meta': 'messaging-webhook-meta',
   'resend': 'messaging-webhook-resend',
@@ -484,10 +485,10 @@ function ChannelCard({
             </button>
             <button
               onClick={onToggle}
-              disabled={isLoading || isConnecting}
+              disabled={isLoading}
               className={cn(
                 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50',
-                isConnected
+                isConnected || isConnecting
                   ? 'bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10'
                   : 'bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-500/20'
               )}
@@ -496,6 +497,11 @@ function ChannelCard({
                 <>
                   <WifiOff className="w-3.5 h-3.5" />
                   Desconectar
+                </>
+              ) : isConnecting ? (
+                <>
+                  <WifiOff className="w-3.5 h-3.5 text-amber-500" />
+                  <span className="text-amber-600 dark:text-amber-400">Cancelar</span>
                 </>
               ) : (
                 <>
