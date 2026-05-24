@@ -19,7 +19,11 @@
  *   chamadas externas da Evolution API sem JWT do Supabase.
  * - Exemplo: `supabase functions deploy messaging-webhook-evolution --no-verify-jwt`
  */
+// @ts-ignore - Supabase Edge Functions environment supports npm: prefix
 import { createClient } from "npm:@supabase/supabase-js@2";
+
+// Declare Deno global for IDEs that don't have Deno extension enabled
+declare const Deno: any;
 
 // =============================================================================
 // TYPES
@@ -348,7 +352,7 @@ async function triggerAIProcessing(params: {
 // MAIN HANDLER
 // =============================================================================
 
-Deno.serve(async (req) => {
+Deno.serve(async (req: Request) => {
   // CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
@@ -387,7 +391,7 @@ Deno.serve(async (req) => {
     return json(500, { error: "Supabase não configurado no runtime" });
   }
 
-  const supabase = createClient(supabaseUrl, serviceKey);
+  const supabase = createClient<any, any, any>(supabaseUrl, serviceKey);
 
   // Fetch channel by ID (not by instance name — avoids attacker-controlled lookup)
   // Allow pending status so the first connection.update can set it to connected
@@ -424,6 +428,22 @@ Deno.serve(async (req) => {
 
   // Normalize event name: Evolution v2 sends UPPERCASE, some versions use lowercase
   const eventNorm = payload.event?.toLowerCase().replace(/_/g, ".");
+
+  // =========================================================================
+  // AUTO-HEAL CHANNEL STATUS
+  // =========================================================================
+  // If we receive a valid webhook but the channel is stuck in 'connecting' or 'pending',
+  // auto-heal the status to 'connected' because receiving events implies an active connection.
+  if (channel.status === "connecting" || channel.status === "pending") {
+    if (eventNorm === "messages.upsert" || eventNorm === "messages.update" || eventNorm === "presence.update") {
+      await supabase
+        .from("messaging_channels")
+        .update({ status: "connected" })
+        .eq("id", channelId);
+      channel.status = "connected"; // update local reference
+      console.log(`[Evolution] Auto-healed channel ${channelId} status to connected`);
+    }
+  }
 
   // =========================================================================
   // AUDIT LOGGING & DEDUPLICATION
@@ -498,7 +518,7 @@ Deno.serve(async (req) => {
 // =============================================================================
 
 async function handleMessagesUpsert(
-  supabase: ReturnType<typeof createClient>,
+  supabase: any,
   channel: {
     id: string;
     organization_id: string;
@@ -692,7 +712,7 @@ async function handleMessagesUpsert(
 }
 
 async function handleMessagesUpdate(
-  supabase: ReturnType<typeof createClient>,
+  supabase: any,
   channel: { id: string },
   payload: EvolutionUpdatePayload
 ) {
@@ -744,7 +764,7 @@ async function handleMessagesUpdate(
 }
 
 async function handleConnectionUpdate(
-  supabase: ReturnType<typeof createClient>,
+  supabase: any,
   channel: { id: string; credentials: Record<string, string> },
   payload: EvolutionConnectionUpdatePayload
 ) {
@@ -826,7 +846,7 @@ async function fetchEvolutionPhone(
 // =============================================================================
 
 async function getLeadRoutingRule(
-  supabase: ReturnType<typeof createClient>,
+  supabase: any,
   channelId: string
 ): Promise<{ boardId: string; stageId: string | null } | null> {
   const { data, error } = await supabase
@@ -846,7 +866,7 @@ async function getLeadRoutingRule(
 }
 
 async function autoCreateDeal(
-  supabase: ReturnType<typeof createClient>,
+  supabase: any,
   params: {
     organizationId: string;
     contactId: string;
