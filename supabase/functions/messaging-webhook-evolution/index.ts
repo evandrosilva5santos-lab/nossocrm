@@ -386,11 +386,12 @@ Deno.serve(async (req) => {
   const supabase = createClient(supabaseUrl, serviceKey);
 
   // Fetch channel by ID (not by instance name — avoids attacker-controlled lookup)
+  // Allow pending status so the first connection.update can set it to connected
   const { data: channel, error: channelErr } = await supabase
     .from("messaging_channels")
     .select("id, organization_id, business_unit_id, external_identifier, status, credentials")
     .eq("id", channelId)
-    .in("status", ["connected", "active"])
+    .in("status", ["connected", "active", "pending", "connecting"])
     .maybeSingle();
 
   if (channelErr) {
