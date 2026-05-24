@@ -99,6 +99,10 @@ function json(status: number, body: unknown) {
 }
 
 function getApiKeyFromRequest(req: Request): string {
+  const url = new URL(req.url);
+  const queryApiKey = url.searchParams.get("apikey") || url.searchParams.get("apiKey") || "";
+  if (queryApiKey.trim()) return queryApiKey.trim();
+
   const xApiKey = req.headers.get("x-api-key") || "";
   if (xApiKey.trim()) return xApiKey.trim();
 

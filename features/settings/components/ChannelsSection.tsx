@@ -174,12 +174,15 @@ const WEBHOOK_CONFIGS: Record<string, {
   },
 };
 
-function WebhookInfo({ channelId, provider, verifyToken }: { channelId: string; provider: string; verifyToken?: string }) {
+function WebhookInfo({ channelId, provider, verifyToken, apiKey }: { channelId: string; provider: string; verifyToken?: string; apiKey?: string }) {
   const { addToast } = useToast();
   const [expanded, setExpanded] = useState(false);
   const projectRef = getSupabaseProjectRef();
   const fn = WEBHOOK_FUNCTION_MAP[provider] || 'messaging-webhook-zapi';
-  const webhookUrl = `https://${projectRef}.supabase.co/functions/v1/${fn}/${channelId}`;
+  let webhookUrl = `https://${projectRef}.supabase.co/functions/v1/${fn}/${channelId}`;
+  if (provider === 'evolution' && apiKey) {
+    webhookUrl += `?apikey=${apiKey}`;
+  }
   const config = WEBHOOK_CONFIGS[provider];
 
   const copyToClipboard = async (text: string, label: string) => {
@@ -468,6 +471,7 @@ function ChannelCard({
           channelId={channel.id}
           provider={channel.provider}
           verifyToken={(channel.settings?.verifyToken || channel.credentials?.verifyToken) as string | undefined}
+          apiKey={channel.credentials?.apiKey as string | undefined}
         />
 
         {/* Actions */}
