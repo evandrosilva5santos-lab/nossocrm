@@ -28,3 +28,7 @@
 - Imports: use `@/` alias (e.g., `@/lib/utils`, `@/components/ui`)
 - Naming: camelCase for variables/functions, PascalCase for components/types
 - Tests: Vitest + happy-dom + React Testing Library; place `.test.ts(x)` files alongside source
+
+## Evolution API Quirks (CRITICAL)
+- **Webhook by Events**: NEVER enable "Webhook by Events" in the Evolution API UI panel. It mutates the configured URL and breaks the Supabase Edge Function routing/auth. Keep it disabled.
+- **Fire-and-Forget**: Vercel kills background tasks on API routes immediately after returning the HTTP response. Always `await` the message sending to Evolution API inside the route instead of using fire-and-forget logic to prevent `AbortError`.
