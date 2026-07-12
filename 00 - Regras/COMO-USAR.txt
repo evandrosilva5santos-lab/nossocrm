@@ -1,0 +1,140 @@
+================================================================================
+COMO USAR O START-SYSTEM — GUIA PARA O EVAN
+================================================================================
+Leia este arquivo primeiro. É o mais importante de todos.
+================================================================================
+
+O QUE É ISSO?
+─────────────
+Esta pasta (START-SYSTEM) é o "cérebro" de todos os seus projetos.
+Ela contém as regras que a IA vai seguir sempre que você criar um app.
+
+Pense assim: é como um manual de construção de uma construtora.
+Todo engenheiro da construtora segue o mesmo manual.
+O resultado: todas as obras ficam organizadas do mesmo jeito.
+
+--------------------------------------------------------------------------------
+OS ARQUIVOS DESTA PASTA
+--------------------------------------------------------------------------------
+
+  ARQUIVO               PARA QUE SERVE
+  ──────────────────    ──────────────────────────────────────────────────────
+  RULES.md              A LEI. A IA lê isso antes de fazer qualquer coisa.
+  DESIGN.md             Padrão visual: cores, fontes, botões, espaçamentos.
+  ARCHITECTURE.md       Como organizar pastas e conectar módulos.
+  PRD-TEMPLATE.md       Formulário que você preenche antes de pedir código.
+  TUTORIAL-TEMPLATE.txt Modelo de tutorial gerado para cada módulo.
+  COMO-USAR.txt         Este arquivo. O guia de uso.
+
+--------------------------------------------------------------------------------
+COMO COMEÇAR UM PROJETO NOVO
+--------------------------------------------------------------------------------
+
+PASSO 1 — Preencha o PRD
+  → Copie o arquivo PRD-TEMPLATE.md
+  → Renomeie para PRD.md
+  → Preencha todas as seções
+  → Salve na pasta /docs/ do novo projeto
+
+PASSO 2 — Comece a conversa com a IA assim:
+
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                                                                     │
+  │  "Leia os arquivos RULES.md, DESIGN.md e ARCHITECTURE.md que vou   │
+  │   te enviar. Depois leia o PRD.md do projeto. Confirme que          │
+  │   entendeu as regras e me diga o que vamos construir."              │
+  │                                                                     │
+  └─────────────────────────────────────────────────────────────────────┘
+
+PASSO 3 — Anexe os arquivos na conversa
+  → RULES.md
+  → DESIGN.md
+  → ARCHITECTURE.md
+  → PRD.md (o que você preencheu)
+
+PASSO 4 — A IA vai confirmar e começar a construir seguindo as regras.
+
+--------------------------------------------------------------------------------
+COMO ADICIONAR UM MÓDULO NOVO A UM PROJETO EXISTENTE
+--------------------------------------------------------------------------------
+
+PASSO 1 — Abra a conversa com a IA e diga:
+
+  "Quero adicionar o módulo [nome] ao projeto [nome do projeto].
+   Leia o RULES.md e o ARCHITECTURE.md antes de começar.
+   Siga a estrutura de pastas obrigatória e gere o TUTORIAL.txt."
+
+PASSO 2 — A IA vai criar:
+  → A pasta /modules/[nome]/
+  → Os arquivos do módulo
+  → O TUTORIAL.txt do módulo
+  → Vai atualizar o CHANGELOG.md
+
+--------------------------------------------------------------------------------
+COMO COPIAR UM MÓDULO DE UM PROJETO PARA OUTRO
+--------------------------------------------------------------------------------
+
+PASSO 1 — Encontre o módulo que quer copiar
+  → Está em: /projeto-origem/src/modules/[nome]/
+
+PASSO 2 — Copie a pasta inteira para o novo projeto
+  → Destino: /projeto-novo/src/modules/[nome]/
+
+PASSO 3 — Ative no config.js do novo projeto
+  → modulos: { [nome]: true }
+
+PASSO 4 — Diga para a IA:
+  "Copiei o módulo [nome] para este projeto.
+   Leia o TUTORIAL.txt dele e me ajude a integrá-lo."
+
+--------------------------------------------------------------------------------
+REGRAS DE OURO (NUNCA ESQUEÇA)
+--------------------------------------------------------------------------------
+
+  ✅ SEMPRE preencha o PRD antes de pedir código
+  ✅ SEMPRE inclua RULES.md no início de cada conversa nova
+  ✅ SEMPRE copie a pasta do módulo inteira (nunca arquivo por arquivo)
+  ✅ SEMPRE configure via config.js, nunca mude o código do módulo
+
+  ❌ NUNCA peça código sem ter o PRD
+  ❌ NUNCA deixe a IA inventar estrutura de pastas
+  ❌ NUNCA salve dados do cliente fixos no código
+  ❌ NUNCA delete módulos sem fazer backup
+
+--------------------------------------------------------------------------------
+DICA: COMANDO RÁPIDO PARA QUALQUER SITUAÇÃO
+--------------------------------------------------------------------------------
+
+Se não sabe o que falar para a IA, use este comando universal:
+
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                                                                     │
+  │  "Você é um engenheiro de software sênior da Start Digital.         │
+  │   Siga obrigatoriamente o RULES.md que vou te enviar.               │
+  │   Meu objetivo é: [DESCREVA O QUE QUER].                            │
+  │   Antes de qualquer código, me mostre o plano e aguarde aprovação." │
+  │                                                                     │
+  └─────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+ESTRUTURA DE PASTAS DO SEU ECOSSISTEMA COMPLETO
+================================================================================
+
+  /START-SYSTEM/              ← esta pasta (o cérebro)
+  /meus-modulos/              ← biblioteca de módulos prontos
+    /kanban/
+    /crm/
+    /proposta/
+    /agenda/
+  /clientes/
+    /cliente-x/               ← projeto do cliente X
+      /src/modules/kanban/    ← cópia do módulo
+      /src/modules/crm/       ← cópia do módulo
+      config.js               ← dados do cliente X
+    /cliente-y/               ← projeto do cliente Y
+      /src/modules/kanban/    ← mesma cópia, outro cliente
+      config.js               ← dados do cliente Y
+
+================================================================================
+PRONTO. AGORA VOCÊ TEM UM SISTEMA PROFISSIONAL DE DESENVOLVIMENTO.
+================================================================================

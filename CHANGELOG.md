@@ -98,7 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Release Notes
 
-**Version 0.1.0** is the first development release of NossoCRM with core messaging and AI agent capabilities.
+**Version 0.1.0** is the first development release of StartCRM with core messaging and AI agent capabilities.
 
 ### Status
 - ✅ Messaging MVP complete (WhatsApp via Meta & Evolution, Email via Resend, Telegram, Instagram)

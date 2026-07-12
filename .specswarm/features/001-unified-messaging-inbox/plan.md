@@ -356,5 +356,5 @@ app/(protected)/messaging/      # New page
 ## References
 
 - [PRD Completo](/Users/thaleslaray/.claude/plans/elegant-knitting-star.md)
-- [Spec](/Users/thaleslaray/code/projetos/nossocrm/.specswarm/features/001-unified-messaging-inbox/spec.md)
-- [Tech Stack](/Users/thaleslaray/code/projetos/nossocrm/.specswarm/tech-stack.md)
+- [Spec](/Users/thaleslaray/code/projetos/startcrm/.specswarm/features/001-unified-messaging-inbox/spec.md)
+- [Tech Stack](/Users/thaleslaray/code/projetos/startcrm/.specswarm/tech-stack.md)

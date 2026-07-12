@@ -1,6 +1,6 @@
 # Release Engineering Setup — Complete
 
-✅ **Release engineering for NossoCRM is now fully configured.**
+✅ **Release engineering for StartCRM is now fully configured.**
 
 This document summarizes what was set up and how to use it.
 

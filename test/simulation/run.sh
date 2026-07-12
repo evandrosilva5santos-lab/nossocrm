@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# NossoCRM — Simulation Test Suite
+# StartCRM — Simulation Test Suite
 #
 # Uso:
 #   bash test/simulation/run.sh           # todos os cenários
@@ -50,7 +50,7 @@ should_run() {
 
 echo ""
 echo "╔══════════════════════════════════════════"
-echo "║  NossoCRM Simulation Tests"
+echo "║  StartCRM Simulation Tests"
 echo "║  Run ID: $TEST_RUN_ID"
 echo "╚══════════════════════════════════════════"
 

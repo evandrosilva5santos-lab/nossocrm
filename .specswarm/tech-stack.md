@@ -1,4 +1,4 @@
-# NossoCRM - Tech Stack
+# StartCRM - Tech Stack
 
 **Version**: 1.0.0
 **Created**: 2026-02-05
@@ -8,7 +8,7 @@
 
 ## Overview
 
-NossoCRM é um CRM moderno construído com arquitetura moderna full-stack usando Next.js App Router com Supabase como backend. O sistema segue padrões de Single Source of Truth (SSOT) com TanStack Query para cache de servidor.
+StartCRM é um CRM moderno construído com arquitetura moderna full-stack usando Next.js App Router com Supabase como backend. O sistema segue padrões de Single Source of Truth (SSOT) com TanStack Query para cache de servidor.
 
 ---
 

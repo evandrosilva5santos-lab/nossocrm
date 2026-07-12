@@ -1,4 +1,4 @@
-# Preview — NossoCRM
+# Preview — StartCRM
 #
 # Triggers a Vercel Preview deployment on every PR.
 # The deployment URL is posted as a PR comment via Vercel's GitHub integration.

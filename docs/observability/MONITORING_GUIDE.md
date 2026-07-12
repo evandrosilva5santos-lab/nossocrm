@@ -1,6 +1,6 @@
 # Observability & Monitoring Guide
 
-NossoCRM — Structured Logging, Health Checks, and HITL Alerting
+StartCRM — Structured Logging, Health Checks, and HITL Alerting
 
 **Date**: 2026-04-09  
 **Status**: Complete  
@@ -10,7 +10,7 @@ NossoCRM — Structured Logging, Health Checks, and HITL Alerting
 
 ## Overview
 
-This guide documents the observability infrastructure for NossoCRM:
+This guide documents the observability infrastructure for StartCRM:
 
 1. **Structured Logging** — JSON-formatted logs for Vercel Logs parsing
 2. **Health Check Endpoint** — `GET /api/health` for availability monitoring
@@ -203,7 +203,7 @@ GROUP BY model
 Lightweight health check with no response body — useful for load balancers:
 
 ```bash
-curl -I https://nossocrm.vercel.app/api/health
+curl -I https://startcrm.vercel.app/api/health
 # HTTP/1.1 200 OK
 # Cache-Control: no-cache, no-store, must-revalidate
 ```
@@ -217,10 +217,10 @@ curl -I https://nossocrm.vercel.app/api/health
 **Application Monitoring**:
 ```bash
 # Check health every 30s
-watch -n 30 'curl -s https://nossocrm.vercel.app/api/health | jq .'
+watch -n 30 'curl -s https://startcrm.vercel.app/api/health | jq .'
 
 # K6 load test with health threshold
-k6 run -e HEALTH_ENDPOINT=https://nossocrm.vercel.app/api/health tests/health-check.js
+k6 run -e HEALTH_ENDPOINT=https://startcrm.vercel.app/api/health tests/health-check.js
 ```
 
 ---
@@ -352,7 +352,7 @@ console.log(`Expired ${expireData[0].expired_count} old pending advances`);
 
 1. **Deployment Monitoring**: Add health check
    - Settings → Monitoring → Health Checks
-   - Endpoint: `https://nossocrm.vercel.app/api/health`
+   - Endpoint: `https://startcrm.vercel.app/api/health`
    - Frequency: Every 60s
    - Alerts: If unhealthy for >5 min
 

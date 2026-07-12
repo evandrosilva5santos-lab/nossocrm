@@ -1,10 +1,10 @@
-# Release Process — NossoCRM
+# Release Process — StartCRM
 
-This document describes the release workflow for NossoCRM, from commit to GitHub Release.
+This document describes the release workflow for StartCRM, from commit to GitHub Release.
 
 ## Overview
 
-Release engineering for NossoCRM follows **semantic versioning** (MAJOR.MINOR.PATCH) with **conventional commits** for automated changelog generation.
+Release engineering for StartCRM follows **semantic versioning** (MAJOR.MINOR.PATCH) with **conventional commits** for automated changelog generation.
 
 - **Semantic Versioning**: https://semver.org/
 - **Conventional Commits**: https://www.conventionalcommits.org/
@@ -12,7 +12,7 @@ Release engineering for NossoCRM follows **semantic versioning** (MAJOR.MINOR.PA
 
 ## Version Strategy
 
-NossoCRM uses `0.x.y` versioning during active development:
+StartCRM uses `0.x.y` versioning during active development:
 
 | Version | Status | Notes |
 |---------|--------|-------|
@@ -198,7 +198,7 @@ Example release on GitHub:
 
 ---
 
-**Full Diff**: [v0.1.0...v0.2.0](https://github.com/thaleslaray/nossocrm/compare/v0.1.0...v0.2.0)
+**Full Diff**: [v0.1.0...v0.2.0](https://github.com/thaleslaray/startcrm/compare/v0.1.0...v0.2.0)
 ```
 
 ## Key Files

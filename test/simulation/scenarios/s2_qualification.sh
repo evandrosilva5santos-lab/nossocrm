@@ -25,7 +25,7 @@ sleep "$WEBHOOK_WAIT"
 evolution_webhook_send "$(cat <<EOF
 {
   "event": "MESSAGES_UPSERT",
-  "instance": "nossocrm-dev",
+  "instance": "startcrm-dev",
   "data": {
     "key": {
       "remoteJid": "$DANY_PHONE_JID",
@@ -54,7 +54,7 @@ sleep "$WEBHOOK_WAIT"
 evolution_webhook_send "$(cat <<EOF
 {
   "event": "MESSAGES_UPSERT",
-  "instance": "nossocrm-dev",
+  "instance": "startcrm-dev",
   "data": {
     "key": {
       "remoteJid": "$DANY_PHONE_JID",
@@ -83,7 +83,7 @@ sleep "$WEBHOOK_WAIT"
 evolution_webhook_send "$(cat <<EOF
 {
   "event": "MESSAGES_UPSERT",
-  "instance": "nossocrm-dev",
+  "instance": "startcrm-dev",
   "data": {
     "key": {
       "remoteJid": "$DANY_PHONE_JID",

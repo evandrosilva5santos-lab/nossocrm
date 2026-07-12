@@ -1,0 +1,144 @@
+================================================================================
+TUTORIAL DO MÓDULO — START DIGITAL
+================================================================================
+Gerado automaticamente. Mantenha este arquivo atualizado a cada mudança.
+================================================================================
+
+NOME DO MÓDULO:     [PREENCHER]
+VERSÃO:             1.0
+DATA DE CRIAÇÃO:    [PREENCHER]
+CRIADO POR:         Start Digital
+PROJETO DE ORIGEM:  [PREENCHER]
+
+--------------------------------------------------------------------------------
+1. O QUE ESTE MÓDULO FAZ
+--------------------------------------------------------------------------------
+
+[Explique em linguagem simples, como se fosse para alguém que não sabe programar]
+
+Exemplo:
+  Este módulo é um quadro Kanban. Ele mostra cartões organizados em colunas
+  (Ex: "A Fazer", "Em Andamento", "Concluído"). O usuário pode arrastar os
+  cartões entre as colunas para indicar o progresso de cada tarefa.
+
+--------------------------------------------------------------------------------
+2. ARQUIVOS DESTE MÓDULO
+--------------------------------------------------------------------------------
+
+/modules/[nome-do-modulo]/
+  ├── index.jsx              → componente principal (tela visual)
+  ├── [modulo].config.js     → configurações do módulo
+  ├── [modulo].utils.js      → funções internas
+  └── TUTORIAL.txt           → este arquivo
+
+--------------------------------------------------------------------------------
+3. DEPENDÊNCIAS (O QUE ESTE MÓDULO PRECISA PARA FUNCIONAR)
+--------------------------------------------------------------------------------
+
+BIBLIOTECAS EXTERNAS:
+  - [nome da biblioteca] — versão [X.X] — para que serve
+
+OUTROS MÓDULOS DO SISTEMA:
+  - [módulo] — por que precisa
+
+DADOS DO CONFIG.JS:
+  - config.design.cor_primaria → usada nos botões
+  - config.modulos.[nome] → precisa estar como "true"
+
+--------------------------------------------------------------------------------
+4. COMO COPIAR PARA UM NOVO PROJETO
+--------------------------------------------------------------------------------
+
+PASSO 1: Copie a pasta inteira
+  → Copie: /projeto-origem/src/modules/[nome]/
+  → Para:  /projeto-novo/src/modules/[nome]/
+
+PASSO 2: Ative no config.js do novo projeto
+  → Abra o arquivo config.js
+  → Encontre a seção "modulos"
+  → Mude para: [nome-do-modulo]: true
+
+PASSO 3: Importe na página que vai usar
+  → Abra a página desejada (Ex: Dashboard.jsx)
+  → Adicione no topo: import NomeModulo from '../modules/[nome]'
+  → Use no HTML: <NomeModulo />
+
+PASSO 4: Configure as opções (opcional)
+  → Abra [modulo].config.js
+  → Ajuste as opções conforme o cliente
+
+PASSO 5: Teste
+  → Rode o projeto
+  → Verifique se o módulo aparece corretamente
+
+--------------------------------------------------------------------------------
+5. CONFIGURAÇÕES DISPONÍVEIS
+--------------------------------------------------------------------------------
+
+No arquivo [modulo].config.js você pode alterar:
+
+  OPÇÃO                   VALOR PADRÃO    O QUE FAZ
+  ─────────────────────   ─────────────   ─────────────────────────────
+  [nome_da_opcao]         [valor]         [descrição simples]
+  [nome_da_opcao]         [valor]         [descrição simples]
+
+--------------------------------------------------------------------------------
+6. EVENTOS QUE ESTE MÓDULO DISPARA
+--------------------------------------------------------------------------------
+
+Quando algo acontece neste módulo, ele avisa o resto do sistema via eventos:
+
+  EVENTO                      QUANDO ACONTECE
+  ─────────────────────────   ──────────────────────────────────────
+  start:[modulo]-[acao]       Quando [descreva o gatilho]
+
+Exemplo de como outro módulo escuta este evento:
+  window.addEventListener('start:[modulo]-[acao]', (e) => {
+    console.log(e.detail) // dados enviados pelo evento
+  })
+
+--------------------------------------------------------------------------------
+7. EVENTOS QUE ESTE MÓDULO ESCUTA
+--------------------------------------------------------------------------------
+
+Este módulo reage quando outros módulos disparam estes eventos:
+
+  EVENTO                      O QUE ESTE MÓDULO FAZ
+  ─────────────────────────   ──────────────────────────────────────
+  start:[outro]-[acao]        [descreva o que acontece]
+
+--------------------------------------------------------------------------------
+8. PROBLEMAS COMUNS E SOLUÇÕES
+--------------------------------------------------------------------------------
+
+PROBLEMA: O módulo não aparece na tela
+SOLUÇÃO:  Verifique se está ativo no config.js (modulos.[nome]: true)
+
+PROBLEMA: As cores estão erradas
+SOLUÇÃO:  Verifique as cores no config.js do cliente (design.cor_primaria)
+
+PROBLEMA: Os dados não estão salvando
+SOLUÇÃO:  Verifique se a api.url_base está correta no config.js
+
+PROBLEMA: [descreva outro problema comum]
+SOLUÇÃO:  [descreva a solução]
+
+--------------------------------------------------------------------------------
+9. HISTÓRICO DE ATUALIZAÇÕES
+--------------------------------------------------------------------------------
+
+  DATA          VERSÃO    O QUE MUDOU
+  ──────────    ───────   ────────────────────────────────────────────
+  [data]        1.0       Versão inicial criada
+
+--------------------------------------------------------------------------------
+10. CONTATO E SUPORTE
+--------------------------------------------------------------------------------
+
+Desenvolvido por: Start Digital
+Site:             startcompanydigital.com
+Dúvidas:          Abra uma conversa no Claude com este TUTORIAL.txt anexado
+
+================================================================================
+FIM DO TUTORIAL
+================================================================================

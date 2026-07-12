@@ -185,7 +185,7 @@ return {
 
 1. **Database Migration**:
    ```bash
-   cd /Users/thaleslaray/code/projetos/nossocrm
+   cd /Users/thaleslaray/code/projetos/startcrm
    supabase migration up
    # Or wait for Vercel to auto-apply on deploy
    ```
@@ -207,14 +207,14 @@ return {
 3. **Verification**:
    ```bash
    # Test health check
-   curl https://nossocrm.vercel.app/api/health | jq .
+   curl https://startcrm.vercel.app/api/health | jq .
 
    # Test structured logging (local dev)
    npm run dev
    # Watch logs for JSON events
 
    # Test HITL alerts (manual trigger in prod)
-   curl -X POST https://nossocrm.vercel.app/api/ai/test-hitl-alert \
+   curl -X POST https://startcrm.vercel.app/api/ai/test-hitl-alert \
      -H "Authorization: Bearer $SUPABASE_SERVICE_KEY"
    ```
 
@@ -239,7 +239,7 @@ return {
 
 ```bash
 # 1. Test structured logger
-cd /Users/thaleslaray/code/projetos/nossocrm
+cd /Users/thaleslaray/code/projetos/startcrm
 npm run dev
 
 # 2. Trigger AI response (watch console for JSON logs)
@@ -259,13 +259,13 @@ curl http://localhost:3000/api/health | jq .
 
 ```bash
 # 1. Verify health check is reachable
-curl https://nossocrm.vercel.app/api/health
+curl https://startcrm.vercel.app/api/health
 
 # 2. Tail structured logs in Vercel
 vercel logs --follow
 
 # 3. Query HITL metrics
-supabase -p nossocrm-db query 'SELECT * FROM vw_hitl_pending_by_age'
+supabase -p startcrm-db query 'SELECT * FROM vw_hitl_pending_by_age'
 ```
 
 ---
@@ -309,4 +309,4 @@ See `docs/observability/MONITORING_GUIDE.md` for:
 - Alert runbooks
 - Integration guides
 
-Or contact: ops@nossocrm.dev
+Or contact: ops@startcrm.dev

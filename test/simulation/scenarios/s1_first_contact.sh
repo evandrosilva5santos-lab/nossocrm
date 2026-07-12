@@ -25,7 +25,7 @@ echo "  Acionando webhook manualmente (fallback idempotente)..."
 evolution_webhook_send "$(cat <<EOF
 {
   "event": "MESSAGES_UPSERT",
-  "instance": "nossocrm-dev",
+  "instance": "startcrm-dev",
   "data": {
     "key": {
       "remoteJid": "$DANY_PHONE_JID",

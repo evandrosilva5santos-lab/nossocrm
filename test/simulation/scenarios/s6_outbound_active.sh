@@ -8,7 +8,7 @@
 # diferente de S1-S5 que começam com inbound.
 # =============================================================================
 
-S6_MSG_TEXT="Olá! Somos da equipe NossoCRM. Vi que você se interessou pelo nosso produto. Posso tirar algumas dúvidas? [SIM-S6-${TEST_RUN_ID}]"
+S6_MSG_TEXT="Olá! Somos da equipe StartCRM. Vi que você se interessou pelo nosso produto. Posso tirar algumas dúvidas? [SIM-S6-${TEST_RUN_ID}]"
 S6_REPLY_TEXT="Oi! Claro, pode falar. Estou interessada sim. [SIM-S6-REPLY-${TEST_RUN_ID}]"
 
 echo ""
@@ -27,7 +27,7 @@ if [ -n "$S6_OUT_MSG_ID" ]; then
   evolution_webhook_send "$(cat <<EOF
 {
   "event": "MESSAGES_UPSERT",
-  "instance": "nossocrm-dev",
+  "instance": "startcrm-dev",
   "data": {
     "key": {
       "remoteJid": "$DANY_PHONE_JID",
@@ -75,7 +75,7 @@ S6_REPLY_ID="${S6_REPLY_MSG_ID:-S6_INBOUND_${TEST_RUN_ID}}"
 evolution_webhook_send "$(cat <<EOF
 {
   "event": "MESSAGES_UPSERT",
-  "instance": "nossocrm-dev",
+  "instance": "startcrm-dev",
   "data": {
     "key": {
       "remoteJid": "$DANY_PHONE_JID",

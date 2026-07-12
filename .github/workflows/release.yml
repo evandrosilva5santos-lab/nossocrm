@@ -1,4 +1,4 @@
-# Release — NossoCRM
+# Release — StartCRM
 #
 # Triggered when a semantic version tag (vX.Y.Z) is pushed to main branch.
 # Creates a GitHub Release with auto-generated release notes from merged PRs.

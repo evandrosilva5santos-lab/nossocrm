@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Corrigir todos os problemas identificados na auditoria de qualidade do NossoCRM em três domínios: TanStack Query, Supabase, e Next.js/React.
+**Goal:** Corrigir todos os problemas identificados na auditoria de qualidade do StartCRM em três domínios: TanStack Query, Supabase, e Next.js/React.
 
 **Architecture:** Três domínios independentes executados sequencialmente. Cada domínio tem suas próprias tasks. Sem mudanças de feature — só correções de padrão e qualidade.
 
@@ -134,14 +134,14 @@ useMutation({
 - [ ] **Step 13: TypeScript check**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && pnpm tsc --noEmit 2>&1 | head -30
+  cd /Users/thaleslaray/code/projetos/startcrm && pnpm tsc --noEmit 2>&1 | head -30
   ```
   Esperado: zero erros.
 
 - [ ] **Step 14: Commit**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && git add lib/query/hooks/ && git commit -m "fix(query): migrate invalidateQueries from onSuccess to onSettled in 12 hooks
+  cd /Users/thaleslaray/code/projetos/startcrm && git add lib/query/hooks/ && git commit -m "fix(query): migrate invalidateQueries from onSuccess to onSettled in 12 hooks
 
   Ensures cache invalidation runs on both success and error.
   onSuccess-only invalidation silently skips on mutation failure.
@@ -190,13 +190,13 @@ useMutation({
 - [ ] **Step 5: TypeScript check**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && pnpm tsc --noEmit 2>&1 | head -20
+  cd /Users/thaleslaray/code/projetos/startcrm && pnpm tsc --noEmit 2>&1 | head -20
   ```
 
 - [ ] **Step 6: Commit**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && git add lib/query/ && git commit -m "fix(query): replace raw string query keys with queryKeys factory
+  cd /Users/thaleslaray/code/projetos/startcrm && git add lib/query/ && git commit -m "fix(query): replace raw string query keys with queryKeys factory
 
   Eliminates typo risk and enables consistent cache invalidation.
 
@@ -274,7 +274,7 @@ if (!data) return null; // ou throw, dependendo do contexto
 - [ ] **Step 7: TypeScript check**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && pnpm tsc --noEmit 2>&1 | head -30
+  cd /Users/thaleslaray/code/projetos/startcrm && pnpm tsc --noEmit 2>&1 | head -30
   ```
 
   Erros de tipo esperados: `.maybeSingle()` retorna `T | null`, código que assume `T` vai quebrar — corrigir cada um.
@@ -282,7 +282,7 @@ if (!data) return null; // ou throw, dependendo do contexto
 - [ ] **Step 8: Commit**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && git add lib/supabase/ && git commit -m "fix(supabase): replace .single() with .maybeSingle() in lookup queries
+  cd /Users/thaleslaray/code/projetos/startcrm && git add lib/supabase/ && git commit -m "fix(supabase): replace .single() with .maybeSingle() in lookup queries
 
   .single() throws PGRST116 when row not found.
   .maybeSingle() returns null gracefully for optional lookups.
@@ -317,7 +317,7 @@ grep -rL "'use client'" app/\(protected\)/*/page.tsx app/\(protected\)/page.tsx 
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Dashboard | NossoCRM',
+  title: 'Dashboard | StartCRM',
 };
 ```
 
@@ -332,26 +332,26 @@ export const metadata: Metadata = {
   Para cada page Server Component, adicionar no topo (após imports existentes):
   ```ts
   import type { Metadata } from 'next';
-  export const metadata: Metadata = { title: '<Nome> | NossoCRM' };
+  export const metadata: Metadata = { title: '<Nome> | StartCRM' };
   ```
 
   Títulos por page:
   - `/` (redirect page) → não precisa
-  - `/dashboard` → `Dashboard | NossoCRM`
-  - `/boards` → `Funis | NossoCRM`
-  - `/contacts` → `Contatos | NossoCRM`
-  - `/activities` → `Atividades | NossoCRM`
-  - `/inbox` → `Inbox | NossoCRM`
-  - `/decisions` → `Decisões | NossoCRM`
-  - `/messaging` → `Mensagens | NossoCRM`
-  - `/reports` → `Relatórios | NossoCRM`
-  - `/pipeline` → `Pipeline | NossoCRM`
-  - `/profile` → `Perfil | NossoCRM`
-  - `/settings` → `Configurações | NossoCRM`
-  - `/settings/ai` → `IA | Configurações | NossoCRM`
-  - `/settings/integracoes` → `Integrações | NossoCRM`
-  - `/settings/products` → `Produtos | NossoCRM`
-  - `/ai` → `AI Hub | NossoCRM`
+  - `/dashboard` → `Dashboard | StartCRM`
+  - `/boards` → `Funis | StartCRM`
+  - `/contacts` → `Contatos | StartCRM`
+  - `/activities` → `Atividades | StartCRM`
+  - `/inbox` → `Inbox | StartCRM`
+  - `/decisions` → `Decisões | StartCRM`
+  - `/messaging` → `Mensagens | StartCRM`
+  - `/reports` → `Relatórios | StartCRM`
+  - `/pipeline` → `Pipeline | StartCRM`
+  - `/profile` → `Perfil | StartCRM`
+  - `/settings` → `Configurações | StartCRM`
+  - `/settings/ai` → `IA | Configurações | StartCRM`
+  - `/settings/integracoes` → `Integrações | StartCRM`
+  - `/settings/products` → `Produtos | StartCRM`
+  - `/ai` → `AI Hub | StartCRM`
   - `/deals/[dealId]/cockpit` → usar `generateMetadata`
 
 - [ ] **Step 3: Pages com `'use client'` — pular ou criar wrapper**
@@ -361,13 +361,13 @@ export const metadata: Metadata = {
 - [ ] **Step 4: TypeScript check**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && pnpm tsc --noEmit 2>&1 | head -20
+  cd /Users/thaleslaray/code/projetos/startcrm && pnpm tsc --noEmit 2>&1 | head -20
   ```
 
 - [ ] **Step 5: Commit**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && git add app/ && git commit -m "feat(next): add page metadata to protected routes
+  cd /Users/thaleslaray/code/projetos/startcrm && git add app/ && git commit -m "feat(next): add page metadata to protected routes
 
   Improves browser tab titles for multi-tab UX.
 
@@ -412,7 +412,7 @@ const ContactFormModal = dynamic(
 - [ ] **Step 3: TypeScript check + verificar que modais ainda abrem**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && pnpm tsc --noEmit 2>&1 | head -20
+  cd /Users/thaleslaray/code/projetos/startcrm && pnpm tsc --noEmit 2>&1 | head -20
   ```
 
   Verificar que os tipos das props dos modais ainda resolvem corretamente (dynamic imports preservam tipos quando `.then()` é usado corretamente).
@@ -420,7 +420,7 @@ const ContactFormModal = dynamic(
 - [ ] **Step 4: Commit**
 
   ```bash
-  cd /Users/thaleslaray/code/projetos/nossocrm && git add features/ && git commit -m "perf(bundle): lazy load heavy modals with dynamic imports
+  cd /Users/thaleslaray/code/projetos/startcrm && git add features/ && git commit -m "perf(bundle): lazy load heavy modals with dynamic imports
 
   Reduces initial bundle size for contacts and inbox pages.
   Modals load on first open, not on page load.
@@ -448,7 +448,7 @@ Domínio 3 (Next.js/React)
 ## Verificação Final
 
 ```bash
-cd /Users/thaleslaray/code/projetos/nossocrm
+cd /Users/thaleslaray/code/projetos/startcrm
 pnpm tsc --noEmit   # zero erros
 pnpm next build     # build limpo
 ```

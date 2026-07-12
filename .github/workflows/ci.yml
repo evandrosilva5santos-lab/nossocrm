@@ -1,4 +1,4 @@
-# CI — NossoCRM
+# CI — StartCRM
 #
 # Jobs:
 #   check  — lint + typecheck + tests (runs on every PR and push to main/feature branches)
