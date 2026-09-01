@@ -90,6 +90,11 @@ export async function updateSession(request: NextRequest) {
     const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/auth')
     const isPublicRoute = pathname === '/' || pathname.startsWith('/join') || isSetupRoute || isInstallRoute
 
+    // O link de recuperação cria uma sessão antes de o usuário definir a nova senha.
+    // Sem esta exceção, o guard abaixo levaria essa sessão direto para /dashboard
+    // e a troca de senha nunca aconteceria.
+    const isPasswordResetRoute = pathname.startsWith('/auth/reset-password')
+
     if (!user && !isAuthRoute && !isPublicRoute) {
         const url = request.nextUrl.clone()
         url.pathname = '/login'
@@ -97,7 +102,7 @@ export async function updateSession(request: NextRequest) {
     }
 
     // Redirect authenticated users away from login
-    if (user && isAuthRoute) {
+    if (user && isAuthRoute && !isPasswordResetRoute) {
         const url = request.nextUrl.clone()
         url.pathname = '/dashboard'
         return NextResponse.redirect(url)
